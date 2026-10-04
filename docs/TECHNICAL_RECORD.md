@@ -4,7 +4,7 @@
 **Final model:** CatBoost, `notebooks/01_final_catboost.ipynb`. **Public leaderboard PR-AUC 0.19586** (team best). Out-of-fold CV PR-AUC 0.2384.
 **Written:** 2026-10-04, from the full project record:
 - `docs/research_log/decision_log.md`: decision log;
-- `docs/research_log/handoff_2026-10-04.md` and `docs/research_log/research_brief_2026-10-04.md`;
+- `docs/research_log/research_brief_2026-10-04.md`;
 - `docs/eda/EDA_report.md` and `docs/eda/Extended_EDA_Report.md`;
 - every experiment notebook (now in `notebooks/`) and every leaderboard upload.
 
@@ -778,7 +778,7 @@ Changes nothing on the current files. Exists because the final ranking uses **un
 - **Unclear semantics:** spend window, account-age unit, currency.
 - **Selection bias:** the final model was chosen among many candidates using CV and the public leaderboard, so its scores are slightly optimistic. Nested CV or an untouched holdout would be needed for an unbiased estimate.
 - **Operational:** no cost or loss labels, so the operating point optimises F1, not business cost.
-- **Engineering:** the saved notebook must still get the new-test-file fix before submission (see `docs/research_log/final_model_handoff.md` §2 and §5). Without it, the id-order assertion crashes on a different test file.
+- **Engineering:** the final notebook (`final_notebook/predict_catboost.ipynb`) scores any test file in its own row order and has no id-order assertion against the sample file, so a different private test file does not crash it.
 
 ---
 
@@ -838,14 +838,12 @@ Negative results are evidence of rigour; present them as a table in the report.
 | Final notebook (deliverable, scoring only) | `final_notebook/predict_catboost.ipynb` + `final_notebook/model.pkl`; see `final_notebook/README.md` |
 | Training notebook | `notebooks/01_final_catboost.ipynb` (saves the same `model.pkl` bundle to `results/catboost/`) |
 | One-command pipeline | `python -m fraudlab all` (eda → select → train → predict → verify); see `fraudlab/README.md` |
-| Notebook handoff (operation, fixes, checks) | `docs/research_log/final_model_handoff.md` |
 | Uploaded submission (0.19586) | `results/leaderboard_uploads/01_catboost_3seeds_FINAL.csv`, MD5 `d666afc9c1454c2933b2aca8e21933fb` |
 | Every public upload | `results/leaderboard.csv` |
 | Requirements | `requirements.txt` (catboost 1.2.10, numpy 2.4.6, pandas 3.0.6, scikit-learn 1.9.1, …); tested on Python 3.13 / 3.14 |
 | EDA reports | `docs/eda/EDA_report.md`, `docs/eda/Extended_EDA_Report.md` |
 | Decision log | `docs/research_log/decision_log.md` |
 | Research brief (shift diagnosis, every experiment) | `docs/research_log/research_brief_2026-10-04.md` |
-| Earlier handoff | `docs/research_log/handoff_2026-10-04.md` |
 | Notebooks | `notebooks/01_final_catboost`, `02_model_comparison`, `03_shift_reanchoring`; indexed in `notebooks/README.md` |
 | Model comparison | `results/model_selection/REPORT.md`; see `results/README.md` |
 

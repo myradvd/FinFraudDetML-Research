@@ -187,6 +187,34 @@ flowchart TB
 - **Fairness (FEAT):** non-Singapore rows fill 89% of the test top 2%, but country carries only 3.8% of importance and removing their extra bursts lowered public PR-AUC (0.184) → suggesting behavioural signals rather than country alone; monitor country alert rates.
 - **Next:** account ids and timestamps, investigator feedback [7], per-alert SHAP explanations, cost labels.
 
+
+## 6. Post-Hackathon Reflections & Future Improvements
+
+Looking back at the training data after the competition, the core problem wasn't the model but the data. 20,000 rows and
+353 frauds, with no timestamp and no account id, turned out to be a messy and unrepresentative picture of the test set:
+
+- **It didn't represent the test population:** test had 3× the blanks, 1.7× the new devices, 1.9× the hourly bursts and
+  a far heavier non-Singapore amount tail. Only Singapore stayed stable.
+- **The signals didn't mean the same thing in the test set:** the same flags were fraud less often there, so every
+  model family lost the same ~0.045 PR-AUC from CV to test. No correction learned from the training labels alone could
+  recover it (§3).
+- **Some fields were ambiguous:** `spend_last_24h` is *smaller* than the transaction itself in 3,904 rows, and `account_age` is capped at 4,000.
+- **It was too small for rare combinations:** 23% of frauds fire none of the six risk flags, and the learning curve was still rising.
+
+With more time I would fix the data before tuning the model:
+
+| Improvement | What it would enable |
+|---|---|
+| **Supplement with real-world fraud data.** Public datasets such as IEEE-CIS, Bank Account Fraud [9] and PaySim [10], mapped onto the shared fields (amount, hour, channel, device newness, velocity) | Pre-training or transfer learning on far more positives. It would also test whether the relationships learned here hold in other populations, the weak point of assumption 3 |
+| **Synthetic data that mirrors real-world trends.** A transaction simulator with persistent customers, merchants and timestamps, and injected fraud scenarios such as compromised-card bursts and account takeover on a new device [11], calibrated to published fraud rates and to this data's marginals | Controlled experiments on *how* a shift affects each model. Our stress tests failed because the perturbations were guessed, so a simulator must be checked against a real hold-out before it is trusted |
+| **Time-aware sampling and validation** (needs timestamps and account ids) | Out-of-time splits (train on the past, validate on the future), rolling windows, label-delay simulation and account-grouped CV [7]. These mimic deployment and would have exposed the drift *before* the leaderboard did |
+| **Account-level behavioural features** | Time since the last transaction, rolling spend against the account's own history, device history per account: the "unusual for this customer" signal that fraud detection relies on, which the per-row fields only approximate |
+| **Drift monitoring in production** | Adversarial train-vs-new AUC and per-feature stability indices on every scored batch, plus share-based thresholds (already used here) and scheduled retraining with investigator feedback |
+
+**The lesson I'm taking to the next hackathon:** run the train-vs-test (adversarial) check on day one. If the data can't
+represent the target, plan for external or simulated data and time-aware validation from the start, instead of trying
+to correct the shift after the model is built.
+
 ---
 
 ## References
@@ -199,6 +227,9 @@ flowchart TB
 6. Cawley & Talbot, *JMLR*, 2010.
 7. Dal Pozzolo et al., *IEEE TNNLS*, 2018.
 8. MAS, *FEAT Principles*, 2018.
+9. Jesus et al., *Turning the Tables: Biased, Imbalanced, Dynamic Tabular Datasets for ML Evaluation*, NeurIPS Datasets & Benchmarks, 2022.
+10. Lopez-Rojas, Elmir & Axelsson, *PaySim: A financial mobile money simulator for fraud detection*, EMSS, 2016.
+11. Le Borgne et al., *Reproducible Machine Learning for Credit Card Fraud Detection: Practical Handbook*, Université Libre de Bruxelles, 2022.
 
 ---
 

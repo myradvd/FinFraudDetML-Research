@@ -13,8 +13,6 @@
 | File | Contents |
 |---|---|
 | [`decision_log.md`](research_log/decision_log.md) | Goals, scoring, working rules and the dated **decisions log**: every agreed choice with its evidence |
-| [`final_model_handoff.md`](research_log/final_model_handoff.md) | Handoff of the final CatBoost notebook: walkthrough, fixes, checks, expected private-leaderboard behaviour |
-| [`handoff_2026-10-04.md`](research_log/handoff_2026-10-04.md) | Mid-project state: what was tried, what was not, an honest assessment |
 | [`research_brief_2026-10-04.md`](research_log/research_brief_2026-10-04.md) | The brief written to search for ideas when stuck at public 0.196, with a corrected diagnosis |
 
 These files were written during the competition and use the **original file names**. Mapping to the current layout:

@@ -1,6 +1,6 @@
 # Research brief: Datathon Track 2 fraud detection, stuck at ~0.196 public PR-AUC, need ≥ 0.22
 
-> Written 2026-10-04 for a research agent picking this up cold. Everything below was measured; nothing is a guess unless marked. Deeper history: `claude_context/project_context.md` (decisions log), `claude_context/handoff_2026-10-04.md`, EDA in `data/EDA/`.
+> Written 2026-10-04 for a research agent picking this up cold. Everything below was measured; nothing is a guess unless marked. Deeper history: `docs/research_log/decision_log.md` (decisions log), EDA in `docs/eda/`.
 
 ## 1. The task and the bar
 - **Task:** binary classification of card transactions, `fraud` 0/1. Submit `id,prediction` (a probability in [0,1]) for 12,000 test rows, in the order of `format/sample_submission.csv`.
