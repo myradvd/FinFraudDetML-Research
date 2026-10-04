@@ -1,0 +1,17 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Unit tests
+        run: python -m pytest -q
+      - name: Shipped model reproduces the 0.19586 submission byte for byte
+        run: python -m fraudlab verify

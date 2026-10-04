@@ -1,0 +1,33 @@
+# Full environment: the fraudlab pipeline, every notebook, the final notebook and the tests.
+# Tested on Python 3.13 and 3.14 (Linux / WSL2). Install with:  pip install -r requirements.txt
+#
+# CatBoost, NumPy and pandas are pinned exactly: the final submission is reproduced byte for byte only with
+# these versions (CatBoost 1.2.10, 3 threads). Other packages are pinned to the tested versions.
+
+# --- core: final model, pipeline -------------------------------------------------------------------------------
+catboost==1.2.10
+numpy==2.4.6
+pandas==3.0.6
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+
+# --- challenger models (model zoo + experiment notebooks) ------------------------------------------------------
+lightgbm==4.7.0
+xgboost==3.4.1
+
+# --- figures, reports ------------------------------------------------------------------------------------------
+matplotlib==3.11.2
+tabulate==0.10.0
+
+# --- notebooks -------------------------------------------------------------------------------------------------
+jupyter==1.1.1
+ipykernel==7.4.0
+nbconvert==7.17.1
+nbclient==0.11.0
+
+# --- tests -----------------------------------------------------------------------------------------------------
+pytest==9.1.1
+
+# --- optional, not installed by default ------------------------------------------------------------------------
+# tabpfn            # notebooks/03 TabPFN candidates: needs a licence token and ideally a GPU (run it in Colab)
