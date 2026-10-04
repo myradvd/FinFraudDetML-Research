@@ -112,7 +112,7 @@ def run(skip=()):
 
     C.SELECTION_DIR.mkdir(parents=True, exist_ok=True)
     table.round(4).to_csv(C.SELECTION_DIR / "leaderboard.csv")
-    pd.DataFrame(scores).assign(fraud=y).to_csv(C.SELECTION_DIR / "oof_scores.csv", index=False)
+    pd.DataFrame(scores).to_csv(C.SELECTION_DIR / "oof_scores.csv", index=False)   # row order = training file; no labels
     selection = {"selected": chosen, "reason": reason, "cv_leader": leader,
                  "shortlist": list(table.index[table["tied with CV leader"]]),
                  "flag_share": float(table.loc[chosen, "flag share"]),

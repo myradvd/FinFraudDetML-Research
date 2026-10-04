@@ -37,7 +37,11 @@ def main(argv=None):
     for name in order:
         t0 = time.time()
         print(f"\n== {name} " + "=" * (60 - len(name)))
-        result = stages[name]()
+        try:
+            result = stages[name]()
+        except FileNotFoundError as e:
+            print(f"\nERROR: {e}", file=sys.stderr)
+            return 2
         ok &= result is not False
         print(f"== {name} done in {time.time() - t0:.0f}s")
     return 0 if ok else 1

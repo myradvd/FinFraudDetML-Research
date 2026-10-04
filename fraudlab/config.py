@@ -3,11 +3,12 @@
 Everything here matches `final_notebook/predict_catboost.ipynb` and the bundle in `final_notebook/model.pkl`.
 Changing a value here changes the model, so `python -m fraudlab verify` checks them against that bundle.
 """
+import os
 from pathlib import Path
 
 # --- Paths -------------------------------------------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = ROOT / "data"
+DATA_DIR = Path(os.environ.get("FRAUDLAB_DATA_DIR", ROOT / "data"))   # the competition CSVs are not in the repo
 TRAIN_CSV = DATA_DIR / "Track 2 Training Dataset.csv"
 TEST_CSV = DATA_DIR / "Track 2 Testing Dataset.csv"
 SAMPLE_SUBMISSION = ROOT / "format" / "sample_submission.csv"

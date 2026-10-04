@@ -12,3 +12,8 @@ results/catboost/model.pkl
 results/*/model*.pkl
 final_notebook/predictions.csv
 final_notebook/test.csv
+docs/research_log/handoff_2026-10-04.md
+docs/research_log/final_model_handoff.md
+# competition data: not redistributable, download it yourself (see data/README.md)
+data/*.csv
+format/*.csv

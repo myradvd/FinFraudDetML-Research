@@ -1,16 +1,31 @@
 """Loading and defensive cleaning (`sanitise`) of the raw transaction tables."""
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 
 from . import config as C
 
 
-def load_train(path=C.TRAIN_CSV):
+def _read(path):
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(
+            f"{path} not found. The competition data is not distributed with this repo: download it from the "
+            f"organisers and place the two CSVs in data/ (see data/README.md), or set FRAUDLAB_DATA_DIR to their folder.")
     return pd.read_csv(path)
+
+
+def load_train(path=C.TRAIN_CSV):
+    return _read(path)
 
 
 def load_test(path=C.TEST_CSV):
-    return pd.read_csv(path)
+    return _read(path)
+
+
+def data_available():
+    return C.TRAIN_CSV.exists() and C.TEST_CSV.exists()
 
 
 def sanitise(d):

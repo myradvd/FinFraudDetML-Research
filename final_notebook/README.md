@@ -14,7 +14,8 @@ solution. **It does no training.** Scoring 12,000 rows takes about a second.
 
 ## Run it
 
-From the repository root:
+The competition data is not in the repo: first put the test CSV in `data/` (see [`../data/README.md`](../data/README.md)),
+or point `DATATHON_INPUT_PATH` at it. From the repository root:
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate

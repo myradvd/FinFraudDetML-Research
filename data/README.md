@@ -1,5 +1,32 @@
 # Data
 
+> **The competition data is not included in this repository.** It belongs to the datathon organisers. To run
+> anything that trains or scores, download the files from the organisers and place them as below. Everything you
+> can *read* (figures, executed notebooks, reports, results) works without them.
+
+## Getting the data
+
+```
+data/Track 2 Training Dataset.csv
+data/Track 2 Testing Dataset.csv
+format/sample_submission.csv        # optional: only used to check the submission's id order
+```
+
+Or keep them anywhere and point the pipeline at the folder: `FRAUDLAB_DATA_DIR=/path/to/csvs python -m fraudlab all`
+(the final notebook takes `DATATHON_INPUT_PATH` instead). Check that you have the exact versions this work used:
+
+```bash
+md5sum data/*.csv format/*.csv
+# 7792dcf73cf814c34566c8c32e05632b  data/Track 2 Training Dataset.csv
+# d3ac85298c39862021593532f53896ad  data/Track 2 Testing Dataset.csv
+# 9275e283e76b510f632e7ca8f8dec0f2  format/sample_submission.csv
+```
+
+Without the files, `fraudlab` and the notebooks stop with a message pointing here. The unit tests that need data are
+skipped, and CI runs only the data-free tests.
+
+## Files
+
 | File | Rows | Columns | Notes |
 |---|---|---|---|
 | `Track 2 Training Dataset.csv` | 20,000 | 12 | includes the label `fraud` (353 frauds, 1.77%) |

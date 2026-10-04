@@ -13,5 +13,7 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Unit tests
         run: python -m pytest -q
-      - name: Shipped model reproduces the 0.19586 submission byte for byte
-        run: python -m fraudlab verify
+      # The competition data is not in the repo, so CI runs the data-free tests only.
+      # With the CSVs in data/, `python -m fraudlab verify` also checks the submission byte for byte.
+      - name: Data-free smoke test of the final model bundle
+        run: python -c "import joblib; b = joblib.load('final_notebook/model.pkl'); assert len(b['models']) == 3; print('model.pkl OK, flag share', b['share'])"

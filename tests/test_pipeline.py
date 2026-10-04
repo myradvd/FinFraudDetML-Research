@@ -1,12 +1,17 @@
-"""Fast checks of the pipeline's contracts (no model training; < 10 s)."""
+"""Fast checks of the pipeline's contracts (no model training; < 10 s).
+
+Tests marked `needs_data` are skipped when the competition CSVs are absent (e.g. in CI)."""
 import numpy as np
 import pandas as pd
 import pytest
 
 from fraudlab import config as C
-from fraudlab.data import load_test, load_train, sanitise
+from fraudlab.data import data_available, load_test, load_train, sanitise
 from fraudlab.evaluate import pick_share, to_submission_score
 from fraudlab.features import make_features
+
+
+needs_data = pytest.mark.skipif(not data_available(), reason="competition CSVs not in data/ (see data/README.md)")
 
 
 @pytest.fixture(scope="module")
@@ -14,11 +19,13 @@ def train():
     return load_train()
 
 
+@needs_data
 def test_schema(train):
     assert train.shape == (20000, 12) and train[C.TARGET].sum() == 353
     assert load_test().shape == (12000, 11)
 
 
+@needs_data
 def test_features_shape_and_order(train):
     X = make_features(train)
     assert list(X.columns) == C.FEATURES and len(X) == len(train)
@@ -26,6 +33,7 @@ def test_features_shape_and_order(train):
         assert list(X[c].cat.categories) == C.CATEGORIES[c] and X[c].notna().all()
 
 
+@needs_data
 def test_sanitise_is_identity_on_competition_files(train):
     clean = sanitise(train)
     assert clean.isna().sum().sum() == train[C.RAW_COLS].isna().sum().sum()
