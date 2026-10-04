@@ -1,0 +1,8 @@
+,train,test
+rows with any blank (%),4.88,13.86
+new device (%),9.06,15.37
+>= 4 transactions in 1h (%),2.33,4.38
+amount P90,530.35,1706.77
+amount P95,977.96,3579.87
+account age median (days),790.0,1158.0
+Singapore (%),69.66,62.88

@@ -1,0 +1,4 @@
+,non-SG,AU/JP/MY,new device,>=4 tx in last 1h,median amount (original)
+training out-of-fold top 2% (reference),0.675,0.21,0.737,0.408,525.66
+"test top 2%, original (0.19586)",0.888,0.308,0.778,0.625,679.805
+"test top 2%, re-anchored (addition 2)",0.779,0.208,0.808,0.558,477.79

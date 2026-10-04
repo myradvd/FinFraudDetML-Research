@@ -1,0 +1,2 @@
+model,PR-AUC,flag share,precision,recall,F1
+catboost,0.2384,0.0165,0.3152,0.2946,0.3045

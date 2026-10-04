@@ -1,0 +1,15 @@
+{
+  "selected": "catboost",
+  "reason": "highest public PR-AUC among the candidates tied on CV",
+  "cv_leader": "catboost+logistic 50/50",
+  "shortlist": [
+    "catboost+logistic 50/50",
+    "catboost",
+    "catboost+random_forest 60/40",
+    "catboost+lightgbm+logistic",
+    "logistic"
+  ],
+  "flag_share": 0.0165,
+  "cv_pr_auc": 0.23841780021272457,
+  "public_pr_auc": 0.19586
+}

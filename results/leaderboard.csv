@@ -1,0 +1,16 @@
+rank,submission,public_pr_auc,source,archived_file,approximate
+1,"Plain CatBoost, 3 seeds (final)",0.19586,notebooks/01_final_catboost.ipynb,results/leaderboard_uploads/01_catboost_3seeds_FINAL.csv,
+2,Addition 1: re-anchored non-SG amounts,0.19544,removed notebook (amounts-only variant of notebooks/03_shift_reanchoring.ipynb),results/leaderboard_uploads/02_reanchor_amounts.csv,
+3,TabPFN + LightGBM + logistic rank blend,0.19354,removed notebook (git history: src/tabpfn.ipynb),,
+4,"Plain CatBoost, 1 seed",0.19248,removed notebook (git history: src/fraud_candidates.ipynb),,
+5,"Plain CatBoost, 10 seeds",0.19211,scratch script (seeds 0-9 of notebooks/01_final_catboost.ipynb),results/leaderboard_uploads/05_catboost_10seeds.csv,
+6,"Plain CatBoost, 1 seed, raw probabilities (metric probe)",0.19189,scratch script (seed 0 of notebooks/01_final_catboost.ipynb),results/leaderboard_uploads/06_catboost_1seed_raw_probabilities.csv,
+7,LightGBM,0.19006,removed notebook (git history: src/fraud_candidates.ipynb); re-run by notebooks/02_model_comparison.ipynb,,
+8,CatBoost + context features + flag-excess correction,0.18930,removed notebook (context features + flag-excess prior),,
+9,CatBoost + TabPFN,0.18804,removed notebook (git history: src/fraud_candidates.ipynb),,
+10,CatBoost + test rows as negatives,0.18778,removed notebook (test rows as weight-0.3 negatives),results/leaderboard_uploads/10_test_rows_as_negatives.csv,
+11,TabPFN,0.18750,removed notebook (git history: src/fraud_candidates.ipynb),,
+12,Addition 2: re-anchored non-SG amounts + counts,0.18440,notebooks/03_shift_reanchoring.ipynb,results/leaderboard_uploads/12_reanchor_amounts_and_counts.csv,
+13,CatBoost + logistic 50/50,0.18320,removed notebook; re-run by notebooks/02_model_comparison.ipynb,,
+14,CatBoost + monotone CatBoost + logistic 40/40/20,0.17,removed notebook (monotone CatBoost),,yes
+15,Monotone CatBoost,0.15,removed notebook (monotone CatBoost),,yes

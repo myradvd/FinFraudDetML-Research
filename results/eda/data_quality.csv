@@ -1,0 +1,13 @@
+,train % blank,test % blank
+account_age,0.68,2.2
+country,0.53,2.23
+fraud,0.0,
+id,0.0,0.0
+merchant_category,0.56,2.16
+new_device,0.62,2.44
+spend_last_24h,0.66,2.22
+transaction_amount,0.0,0.0
+transaction_channel,0.62,2.37
+transaction_hour,0.0,0.0
+transactions_last_1h,0.71,2.04
+transactions_last_24h,0.8,2.44
